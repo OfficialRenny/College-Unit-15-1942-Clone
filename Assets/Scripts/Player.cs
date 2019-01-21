@@ -5,17 +5,19 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
-    public float playerSpeed = 4f;
-    public float left = -2.94f;
-    public float up = 5f;
-    public float right = 2.3f;
-    public float down = -4.4f;
+    public float playerSpeed;
+    public float left;
+    public float up;
+    public float right;
+    public float down;
     public GameObject bullet;
 
     void Update() {
         if (Input.GetKeyDown("space"))
         {
-            Instantiate(bullet, transform.position, Quaternion.identity);
+            GameObject b = Instantiate(bullet, transform.position, Quaternion.identity) as GameObject;
+            Bullet b2 = b.GetComponent<Bullet>();
+            b2.friendly = true;
         }
     }
 
@@ -35,5 +37,6 @@ public class Player : MonoBehaviour
             transform.position = new Vector2(right, transform.position.y);
         }
 
+        
     }
 }

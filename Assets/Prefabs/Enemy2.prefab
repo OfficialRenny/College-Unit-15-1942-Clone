@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212638423084152482}
   - component: {fileID: 114654539432795796}
   - component: {fileID: 50244788958507850}
+  - component: {fileID: 68220183494342400}
   m_Layer: 0
   m_Name: Enemy2
   m_TagString: Untagged
@@ -62,6 +63,42 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!68 &68220183494342400
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1749646690508910}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.027691811, y: -0.23507309}
+  - {x: -0.043580994, y: -0.2702558}
+  - {x: -0.12164801, y: -0.28052688}
+  - {x: -0.12573774, y: -0.23983526}
+  - {x: -0.0580855, y: -0.1830101}
+  - {x: -0.05261056, y: -0.15439963}
+  - {x: -0.1775657, y: -0.16135883}
+  - {x: -0.18713263, y: -0.103230715}
+  - {x: -0.06652996, y: 0.02657342}
+  - {x: 0.00068707764, y: 0.30252862}
+  - {x: 0.034927562, y: 0.21076202}
+  - {x: 0.0562685, y: 0.03138423}
+  - {x: 0.19844551, y: -0.11605406}
+  - {x: 0.17737715, y: -0.16481948}
+  - {x: 0.060811415, y: -0.16127372}
+  - {x: 0.0589159, y: -0.18518734}
+  - {x: 0.13099931, y: -0.24549317}
+  - {x: 0.107033625, y: -0.281116}
+  - {x: 0.04156755, y: -0.2596662}
+  - {x: 0.030498162, y: -0.23742485}
+  - {x: -0.03158745, y: -0.24120522}
 --- !u!114 &114654539432795796
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,7 +115,9 @@ MonoBehaviour:
   up: 6
   right: 3
   down: -5
+  maxShotLength: 2
   bullet: {fileID: 0}
+  player: {fileID: 0}
 --- !u!212 &212638423084152482
 SpriteRenderer:
   m_ObjectHideFlags: 1

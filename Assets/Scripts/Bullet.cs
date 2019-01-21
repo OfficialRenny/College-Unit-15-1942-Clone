@@ -5,14 +5,17 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
 
     public float speed = 5.5f;
+    public bool friendly;
 
-    void FixedUpdate()
+    void Start()
     {
-        GetComponent<Rigidbody2D>().velocity = Vector3.forward * speed;
+        if (friendly) Debug.Log("Player fired a bullet!");
+        GetComponent<Rigidbody2D>().velocity = (transform.rotation * Vector3.up) * speed;
     }
 
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
     }
+
 }
