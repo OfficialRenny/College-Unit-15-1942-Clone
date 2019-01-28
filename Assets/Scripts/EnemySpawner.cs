@@ -13,12 +13,19 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
     void SpawnEnemy() {
-        System.Random random = new System.Random();
-        Transform randomSpawn = spawnLocations[(int)Mathf.Floor(spawnLocations.Length * random.Next(0, 1))].transform;
-        GameObject randomEnemy = Instantiate(enemy, randomSpawn, true) as GameObject;
+        Vector3 randomSpawn = spawnLocations[(int)Mathf.Floor(spawnLocations.Length * Random.value)].transform.position;
+        GameObject randomEnemy = Instantiate(enemy, randomSpawn, new Quaternion()) as GameObject;
         randomEnemy.transform.parent = null;
         randomEnemy.GetComponent<Enemy>().player = player;
-        randomEnemy.GetComponent<SpriteRenderer>().sprite = randomSprites[(int)Mathf.Floor(randomSprites.Length * Random.value)];
+        randomEnemy.GetComponent<SpriteRenderer>().sprite = GetRandomSprite();
         Invoke("SpawnEnemy", Random.value * maxSpawnTime);
+    }
+
+    Sprite GetRandomSprite() {
+        Sprite sprite = randomSprites[(int)Mathf.Floor(randomSprites.Length * Random.value)];
+        if (sprite == player.GetComponent<SpriteRenderer>().sprite) {
+            return GetRandomSprite();
+        }
+        return sprite;
     }
 }

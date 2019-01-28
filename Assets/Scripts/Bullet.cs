@@ -9,13 +9,13 @@ public class Bullet : MonoBehaviour {
 
     void Start()
     {
-        if (friendly) Debug.Log("Player fired a bullet!");
         GetComponent<Rigidbody2D>().velocity = (transform.rotation * Vector3.up) * speed;
     }
 
-    private void OnBecameInvisible()
+    private void FixedUpdate()
     {
-        Destroy(gameObject);
+        if (transform.position.y < - 4.8) Destroy(gameObject);
+        if (transform.position.y > 4.8) Destroy(gameObject);
     }
 
 }
