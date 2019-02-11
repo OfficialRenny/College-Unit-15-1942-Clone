@@ -296,7 +296,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -710,7 +710,12 @@ Prefab:
       propertyPath: m_Points.Array.data[24].y
       value: -0.2367878
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1510821234315624, guid: 35e23dd813a307849a7517d77b22c7a0, type: 2}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 68895770054557350, guid: 35e23dd813a307849a7517d77b22c7a0, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 35e23dd813a307849a7517d77b22c7a0, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &1244224195
@@ -764,6 +769,31 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1510821234315624, guid: 35e23dd813a307849a7517d77b22c7a0,
     type: 2}
   m_PrefabInternal: {fileID: 990368621}
+--- !u!61 &1583534290
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1583534289}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.000000044703484, y: 0.00728786}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 0.64, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.3834735, y: 0.58461356}
+  m_EdgeRadius: 0
 --- !u!1 &1607327261
 GameObject:
   m_ObjectHideFlags: 0

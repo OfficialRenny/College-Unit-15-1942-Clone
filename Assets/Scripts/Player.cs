@@ -35,8 +35,6 @@ public class Player : MonoBehaviour
             transform.position = new Vector2(left, transform.position.y);
         } else if (transform.position.x >= right)  {
             transform.position = new Vector2(right, transform.position.y);
-        }
-
-        
+        }        
     }
 }
