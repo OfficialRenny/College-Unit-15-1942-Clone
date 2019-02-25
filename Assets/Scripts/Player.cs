@@ -11,6 +11,13 @@ public class Player : MonoBehaviour
     public float right;
     public float down;
     public GameObject bullet;
+    [HideInInspector]
+    public int lives = 3;
+    [HideInInspector]
+    public int score;
+    [HideInInspector]
+    public bool isRespawning;
+
 
     void Update() {
         if (Input.GetKeyDown("space"))
@@ -36,5 +43,22 @@ public class Player : MonoBehaviour
         } else if (transform.position.x >= right)  {
             transform.position = new Vector2(right, transform.position.y);
         }        
+    }
+
+    public void RespawnPlayer() {
+        if (lives > 0)
+        {
+            isRespawning = true;
+            gameObject.SetActive(false);
+            gameObject.transform.position = new Vector2(0f, -4f);
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies) Destroy(enemy);
+            GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Projectile");
+            foreach (GameObject proj in projectiles) Destroy(proj);
+            lives--;
+            gameObject.SetActive(true);
+            isRespawning = false;
+        }
+        else Framework.GameOver();
     }
 }

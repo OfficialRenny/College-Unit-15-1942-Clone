@@ -20,8 +20,10 @@ public class Bullet : MonoBehaviour {
     {
         if (col.gameObject.tag == "Enemy" && friendly) {
             Destroy(col.gameObject);
+            Destroy(gameObject);
         } else if (col.gameObject.tag == "Player" && !friendly) {
-            Destroy(col.gameObject);
+            col.gameObject.GetComponent<Player>().RespawnPlayer();
+            Destroy(gameObject);
         }
     }
 }
