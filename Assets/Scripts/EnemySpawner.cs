@@ -7,8 +7,10 @@ public class EnemySpawner : MonoBehaviour {
     public GameObject enemy;
     public GameObject player;
     public float maxSpawnTime;
+    public int enemiesToSpawn;
 
     void Start () {
+        enemiesToSpawn = Level.curLevel * 20;
         Invoke("SpawnEnemy", 1f);
 	}
 

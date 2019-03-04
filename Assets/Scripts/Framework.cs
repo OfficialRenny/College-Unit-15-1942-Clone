@@ -10,6 +10,19 @@ public class Framework {
         Fade("MainMenu", Color.black, 0.6f);
     }
 
+    public static void SetHighScore(int level, int score) {
+        int currentHighscore = SavedData.getInstance().highScore[level];
+        if (score > currentHighscore) {
+            SavedData.getInstance().highScore[level] = score;
+        }
+    }
+
+    public static void NextLevel()
+    {
+        Level.curLevel++;
+        Fade("TestLevel", Color.black, 0.6f);
+    }
+
     public static void Fade(string scene, Color col, float multiplier)
     {
         if (areWeFading)

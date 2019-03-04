@@ -91,6 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 8
   friendly: 0
+  shooter: {fileID: 0}
 --- !u!212 &212743779818527950
 SpriteRenderer:
   m_ObjectHideFlags: 1
