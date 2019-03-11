@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour {
     public float speed = 5.5f;
     public bool friendly;
     public GameObject shooter;
+    public GameObject explosion;
     void Start() {
         GetComponent<Rigidbody2D>().velocity = (transform.rotation * Vector3.up) * speed;
     }
@@ -20,7 +21,7 @@ public class Bullet : MonoBehaviour {
     {
         if (col.gameObject.tag == "Enemy" && friendly) {
             shooter.GetComponent<Player>().score += 100;
-            Destroy(col.gameObject);
+            col.gameObject.GetComponent<Enemy>().health -= 100;
             Destroy(gameObject);
         } else if (col.gameObject.tag == "Player" && !friendly && !col.gameObject.GetComponent<Player>().isRespawning) {
             col.gameObject.GetComponent<Player>().RespawnPlayer();

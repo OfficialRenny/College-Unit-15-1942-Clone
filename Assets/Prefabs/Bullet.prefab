@@ -92,6 +92,7 @@ MonoBehaviour:
   speed: 8
   friendly: 0
   shooter: {fileID: 0}
+  explosion: {fileID: 1328487419055062, guid: 86d038848fdc20f41a7c8d8ad8edea9b, type: 2}
 --- !u!212 &212743779818527950
 SpriteRenderer:
   m_ObjectHideFlags: 1

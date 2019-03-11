@@ -11,6 +11,6 @@ public class UI : MonoBehaviour {
     }
 
     public void LoadLevel(int level) {
-        Framework.Fade(levels[level], Color.black, 0.6f);
+        Framework.Fade("TestLevel", Color.black, 0.6f);
     }
 }

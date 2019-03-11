@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public GameObject bullet;
     public Text guiLives;
     public Text guiScore;
+    public Text guiLevel;
+    public GameObject explosion;
     [HideInInspector]
     public int lives = 3;
     [HideInInspector]
@@ -23,7 +25,6 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-
         score = 0;
     }
 
@@ -33,9 +34,9 @@ public class Player : MonoBehaviour
         {
             Shoot();
         }
-
+        guiLevel.text = "LVL " + Level.curLevel;
         guiLives.text = "Lives: " + lives;
-        guiScore.text = "Score: " + score;
+        guiScore.text = "Score:\n" + score;
         if (lives < 1 && !Framework.areWeFading) Framework.GameOver();
     }
 
@@ -99,7 +100,8 @@ public class Player : MonoBehaviour
 
     IEnumerator ToggleRenderer()
     {
-        yield return new WaitForSeconds(0.2f);
+        Instantiate(explosion, gameObject.transform.position, new Quaternion(1.0f, 0.0f, 0.0f, 1.5708f));
+        yield return new WaitForSeconds(1f);
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSeconds(0.2f);
         gameObject.GetComponent<SpriteRenderer>().enabled = true;

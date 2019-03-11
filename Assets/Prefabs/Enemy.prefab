@@ -104,6 +104,9 @@ MonoBehaviour:
   bullet: {fileID: 1057949479858142, guid: 2246ca114139be94cbfe7efff4012af1, type: 2}
   player: {fileID: 1510821234315624, guid: 35e23dd813a307849a7517d77b22c7a0, type: 2}
   spawner: {fileID: 0}
+  explosion: {fileID: 1328487419055062, guid: 86d038848fdc20f41a7c8d8ad8edea9b, type: 2}
+  isBoss: 0
+  health: 100
 --- !u!212 &212434495908698386
 SpriteRenderer:
   m_ObjectHideFlags: 1
