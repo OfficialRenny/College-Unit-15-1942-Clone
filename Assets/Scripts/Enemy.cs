@@ -13,12 +13,16 @@ public class Enemy : MonoBehaviour {
     public float health = 100;
     private Quaternion quat;
     private Bullet b2;
+    private float turnSpeed;
 
     void Start() {
         if (isBoss) {
+            turnSpeed = 5f;
+            SetHealth();
             SpawnBoss();
         } else
         {
+            turnSpeed = 0.5f;
             SetHealth();
             Vector3 dir = player.transform.position - transform.position;
             quat = Quaternion.FromToRotation(Vector3.up, dir);
@@ -33,12 +37,13 @@ public class Enemy : MonoBehaviour {
         quat = Quaternion.FromToRotation(Vector3.up, dir);
         transform.rotation = quat;
         Invoke("Shoot", 0f);
-        GetComponent<Rigidbody2D>().velocity = Vector3.Normalize(dir) * enemySpeed;
+        GetComponent<Rigidbody2D>().velocity = Vector3.Normalize(dir) * (enemySpeed * 0.1f);
+        gameObject.transform.localScale = new Vector3(2f, 2f, 2f);
     }
 
     void SetHealth()
     {
-        health = 100;
+        health = 50;
         if (isBoss)
         {
             this.health = (Level.curLevel * health) + 1000;
@@ -63,7 +68,7 @@ public class Enemy : MonoBehaviour {
         Vector3 dir = player.transform.position - transform.position;
         Quaternion target = Quaternion.FromToRotation(Vector3.up, dir);
 
-        transform.rotation = Quaternion.Lerp(current, target, Mathf.Min(1.0f, Time.deltaTime * 0.5f));
+        transform.rotation = Quaternion.Lerp(current, target, Mathf.Min(1.0f, Time.deltaTime * turnSpeed));
         Vector3 lerpedDir = transform.rotation * Vector3.up;
 
         GetComponent<Rigidbody2D>().velocity = Vector3.Normalize(lerpedDir) * enemySpeed;
@@ -76,7 +81,8 @@ public class Enemy : MonoBehaviour {
     
     void Explode()
     {
-        Instantiate(explosion, transform.position, new Quaternion(1.0f, 0.0f, 0.0f, 1.5708f));
+        player.GetComponent<Player>().score += 100;
+        Instantiate(explosion, transform.position, new Quaternion(1.0f, 0.0f, 0.0f, Mathf.Deg2Rad * 90f));
         Destroy(gameObject);
     }
 

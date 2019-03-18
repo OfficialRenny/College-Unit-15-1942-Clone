@@ -8,6 +8,14 @@ public class EnemySpawner : MonoBehaviour {
     public GameObject player;
     public float maxSpawnTime;
     public int enemiesToSpawn;
+    public static bool bossDestroyed;
+    public static bool bossSpawned;
+
+    private void Awake()
+    {
+        bossDestroyed = false;
+        bossSpawned = false;
+    }
 
     void Start () {
         enemiesToSpawn = Level.curLevel * 20;
@@ -21,8 +29,19 @@ public class EnemySpawner : MonoBehaviour {
             randomEnemy.transform.parent = null;
             randomEnemy.GetComponent<Enemy>().player = player;
             randomEnemy.GetComponent<SpriteRenderer>().sprite = GetRandomSprite();
+            if (Level.curLevel > 5 && !bossSpawned && !bossDestroyed && player.GetComponent<Player>().score > Level.curLevel * 1000) SpawnBoss();
         }
         Invoke("SpawnEnemy", Random.value * maxSpawnTime);
+    }
+
+    void SpawnBoss()
+    {
+        Vector3 randomSpawn = spawnLocations[(int)Mathf.Floor(spawnLocations.Length * Random.value)].transform.position;
+        GameObject randomEnemy = Instantiate(enemy, randomSpawn, new Quaternion()) as GameObject;
+        randomEnemy.transform.parent = null;
+        randomEnemy.GetComponent<Enemy>().player = player;
+        randomEnemy.GetComponent<SpriteRenderer>().sprite = GetRandomSprite();
+        randomEnemy.GetComponent<Enemy>().isBoss = true;
     }
 
     Sprite GetRandomSprite() {

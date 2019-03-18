@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public Text guiLives;
     public Text guiScore;
     public Text guiLevel;
+    public Text guiCurLevel;
     public GameObject explosion;
     [HideInInspector]
     public int lives = 3;
@@ -26,6 +27,29 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         score = 0;
+        if (Level.curLevel < 1) Level.curLevel = 1;
+        guiCurLevel.text = "LEVEL " + Level.curLevel;
+        StartCoroutine(DisplayLevel(guiCurLevel));
+    }
+
+    IEnumerator DisplayLevel(Text level)
+    {
+        yield return new WaitForSeconds(0.2f);
+        level.enabled = true;
+        yield return new WaitForSeconds(0.2f);
+        level.enabled = false;
+        yield return new WaitForSeconds(0.2f);
+        level.enabled = true;
+        yield return new WaitForSeconds(0.2f);
+        level.enabled = false;
+        yield return new WaitForSeconds(0.2f);
+        level.enabled = true;
+        yield return new WaitForSeconds(0.2f);
+        level.enabled = false;
+        yield return new WaitForSeconds(0.2f);
+        level.enabled = true;
+        yield return new WaitForSeconds(0.2f);
+        level.enabled = false;
     }
 
     private void Update()
@@ -38,6 +62,10 @@ public class Player : MonoBehaviour
         guiLives.text = "Lives: " + lives;
         guiScore.text = "Score:\n" + score;
         if (lives < 1 && !Framework.areWeFading) Framework.GameOver();
+        if ((score >= Level.curLevel * 1500 && Level.curLevel <= 5) || (score >= Level.curLevel * 1000 && Level.curLevel > 5 && EnemySpawner.bossDestroyed))
+        {
+            Framework.NextLevel();
+        }
     }
 
     private void Shoot() {
@@ -50,11 +78,13 @@ public class Player : MonoBehaviour
     int i;
     private void FixedUpdate()
     {
-        i++;
-        if (i >= 10)
-        {
-            score++;
-            i = 0;
+        if (!Framework.areWeFading || !isRespawning) { 
+            i++;
+            if (i >= 10)
+            {
+                score++;
+                i = 0;
+            }
         }
         Vector2 targetVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         GetComponent<Rigidbody2D>().velocity = targetVelocity * playerSpeed;
@@ -87,7 +117,7 @@ public class Player : MonoBehaviour
             StartCoroutine(ToggleRenderer());
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemy in enemies) Destroy(enemy);
-            GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Projectile");
+            GameObject[] projectiles = GameObject.FindGameObjectsWithTag("Bullet");
             foreach (GameObject proj in projectiles) Destroy(proj);
             lives--;
         }

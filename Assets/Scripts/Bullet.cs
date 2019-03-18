@@ -20,7 +20,6 @@ public class Bullet : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "Enemy" && friendly) {
-            shooter.GetComponent<Player>().score += 100;
             col.gameObject.GetComponent<Enemy>().health -= 100;
             Destroy(gameObject);
         } else if (col.gameObject.tag == "Player" && !friendly && !col.gameObject.GetComponent<Player>().isRespawning) {
