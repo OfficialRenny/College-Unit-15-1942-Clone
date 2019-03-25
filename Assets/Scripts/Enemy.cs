@@ -33,11 +33,12 @@ public class Enemy : MonoBehaviour {
     }
 
     void SpawnBoss() {
+        this.enemySpeed /= 10;
         Vector3 dir = player.transform.position - transform.position;
         quat = Quaternion.FromToRotation(Vector3.up, dir);
         transform.rotation = quat;
         Invoke("Shoot", 0f);
-        GetComponent<Rigidbody2D>().velocity = Vector3.Normalize(dir) * (enemySpeed * 0.1f);
+        GetComponent<Rigidbody2D>().velocity = Vector3.Normalize(dir) * (enemySpeed);
         gameObject.transform.localScale = new Vector3(2f, 2f, 2f);
     }
 

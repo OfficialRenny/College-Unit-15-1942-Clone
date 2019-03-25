@@ -17,12 +17,20 @@ public class EnemySpawner : MonoBehaviour {
         bossSpawned = false;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown("u"))
+        {
+            SpawnBoss();
+        }
+    }
+
     void Start () {
         enemiesToSpawn = Level.curLevel * 20;
         Invoke("SpawnEnemy", 1f);
 	}
 
-    void SpawnEnemy() {
+    public void SpawnEnemy() {
         if (!player.GetComponent<Player>().isRespawning || !Framework.areWeFading) {
             Vector3 randomSpawn = spawnLocations[(int)Mathf.Floor(spawnLocations.Length * Random.value)].transform.position;
             GameObject randomEnemy = Instantiate(enemy, randomSpawn, new Quaternion()) as GameObject;
@@ -34,7 +42,7 @@ public class EnemySpawner : MonoBehaviour {
         Invoke("SpawnEnemy", Random.value * maxSpawnTime);
     }
 
-    void SpawnBoss()
+    public void SpawnBoss()
     {
         Vector3 randomSpawn = spawnLocations[(int)Mathf.Floor(spawnLocations.Length * Random.value)].transform.position;
         GameObject randomEnemy = Instantiate(enemy, randomSpawn, new Quaternion()) as GameObject;
@@ -42,6 +50,7 @@ public class EnemySpawner : MonoBehaviour {
         randomEnemy.GetComponent<Enemy>().player = player;
         randomEnemy.GetComponent<SpriteRenderer>().sprite = GetRandomSprite();
         randomEnemy.GetComponent<Enemy>().isBoss = true;
+        bossSpawned = true;
     }
 
     Sprite GetRandomSprite() {

@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         score = 0;
+        lives = 10000;
         if (Level.curLevel < 1) Level.curLevel = 1;
         guiCurLevel.text = "LEVEL " + Level.curLevel;
         StartCoroutine(DisplayLevel(guiCurLevel));
@@ -110,6 +111,8 @@ public class Player : MonoBehaviour
 
     public void RespawnPlayer()
     {
+        EnemySpawner.bossSpawned = false;
+        EnemySpawner.bossDestroyed = false;
         if (lives > 0)
         {
             isRespawning = true;

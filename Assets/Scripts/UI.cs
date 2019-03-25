@@ -10,7 +10,8 @@ public class UI : MonoBehaviour {
         Debug.Log("should have quit by now");
     }
 
-    public void LoadLevel(int level) {
+    public void LoadLevel() {
+        Level.curLevel = 1;
         Framework.Fade("TestLevel", Color.black, 0.6f);
     }
 }
