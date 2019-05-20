@@ -44,3 +44,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: island layer
+    uniqueID: 3286040663
+    locked: 0

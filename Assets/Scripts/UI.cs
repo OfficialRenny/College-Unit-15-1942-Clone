@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UI : MonoBehaviour {
 
-    public string[] levels;
+    public Text guiLevel;
+
+    private void FixedUpdate() {
+        if (!guiLevel) return;
+        guiLevel.text = string.Format("{0}", Level.curLevel);
+    }
 
     public void Exit() {
         Application.Quit();
@@ -11,7 +16,16 @@ public class UI : MonoBehaviour {
     }
 
     public void LoadLevel() {
-        Level.curLevel = 1;
         Framework.Fade("TestLevel", Color.black, 0.6f);
+    }
+
+    public void IncrementLevel()
+    {
+        Level.curLevel++;
+    }
+
+    public void DecrementLevel()
+    {
+        Level.curLevel--;
     }
 }

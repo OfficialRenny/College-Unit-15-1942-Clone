@@ -5,10 +5,11 @@ public class Island : MonoBehaviour
     public GameObject[] spawnLocations;
     public GameObject island;
     public float maxTime = 5f;
+    public bool isMain;
 
     void Start()
     {
-        Invoke("SpawnIsland", 0f);
+        if (isMain) Invoke("SpawnIsland", 0f);
     }
 
     void SpawnIsland()

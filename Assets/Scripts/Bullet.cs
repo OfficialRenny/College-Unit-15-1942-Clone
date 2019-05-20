@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
@@ -8,6 +6,7 @@ public class Bullet : MonoBehaviour {
     public bool friendly;
     public GameObject shooter;
     public GameObject explosion;
+
     void Start() {
         GetComponent<Rigidbody2D>().velocity = (transform.rotation * Vector3.up) * speed;
     }

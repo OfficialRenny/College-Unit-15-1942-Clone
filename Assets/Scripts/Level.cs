@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Level : MonoBehaviour
 {
-	public static int curLevel;
+    public static int curLevel;
 
     void Awake()
     {
@@ -16,4 +16,5 @@ public class Level : MonoBehaviour
     {
         if (curLevel < 1) curLevel = 1;
     }
+
 }

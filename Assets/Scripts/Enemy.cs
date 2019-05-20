@@ -14,8 +14,13 @@ public class Enemy : MonoBehaviour {
     private Quaternion quat;
     private Bullet b2;
     private float turnSpeed;
+    public AudioClip flyby;
+    AudioSource audioSource;
+    private bool playedAudio = false;
+
 
     void Start() {
+        audioSource = GetComponent<AudioSource>();
         if (isBoss) {
             turnSpeed = 5f;
             SetHealth();
@@ -73,6 +78,13 @@ public class Enemy : MonoBehaviour {
         Vector3 lerpedDir = transform.rotation * Vector3.up;
 
         GetComponent<Rigidbody2D>().velocity = Vector3.Normalize(lerpedDir) * enemySpeed;
+
+        if (this.transform.position.y < player.transform.position.y && !playedAudio)
+        {
+            audioSource.PlayOneShot(flyby, 0.7F);
+            Debug.Log("Played Flyby Sound");
+        }
+        if (this.transform.position.y < player.transform.position.y) playedAudio = false; 
 
         if (health < 0)
         {

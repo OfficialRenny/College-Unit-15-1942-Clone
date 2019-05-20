@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -16,6 +15,7 @@ public class Player : MonoBehaviour
     public Text guiScore;
     public Text guiLevel;
     public Text guiCurLevel;
+    public Text guiHighScore;
     public GameObject explosion;
     [HideInInspector]
     public int lives = 3;
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         score = 0;
-        lives = 10000;
+        lives = 3;
         if (Level.curLevel < 1) Level.curLevel = 1;
         guiCurLevel.text = "LEVEL " + Level.curLevel;
         StartCoroutine(DisplayLevel(guiCurLevel));
@@ -59,12 +59,24 @@ public class Player : MonoBehaviour
         {
             Shoot();
         }
+
+        //start debug/cheat keys
+
+        if (Input.GetKeyDown("[1]")) lives++;
+        if (Input.GetKeyDown("[2]")) lives--;
+        if (Input.GetKeyDown("[4]")) Framework.NextLevel();
+        if (Input.GetKeyDown("[5]")) Framework.PrevLevel();
+
+        //end of debug/cheat keys
+
         guiLevel.text = "LVL " + Level.curLevel;
         guiLives.text = "Lives: " + lives;
         guiScore.text = "Score:\n" + score;
-        if (lives < 1 && !Framework.areWeFading) Framework.GameOver();
+        guiHighScore.text = "HI-SCORE:\n" + Framework.GetHighScore();
+        //if (lives < 1 && !Framework.areWeFading) Framework.GameOver(score);
         if ((score >= Level.curLevel * 1500 && Level.curLevel <= 5) || (score >= Level.curLevel * 1000 && Level.curLevel > 5 && EnemySpawner.bossDestroyed))
         {
+            Framework.SetHighScore(Level.curLevel, score);
             Framework.NextLevel();
         }
     }
@@ -127,7 +139,7 @@ public class Player : MonoBehaviour
         else
         {
             Framework.SetHighScore(Level.curLevel, score);
-            Framework.GameOver();
+            Framework.GameOver(score);
         }
     }
 
