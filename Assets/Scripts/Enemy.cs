@@ -82,9 +82,9 @@ public class Enemy : MonoBehaviour {
         if (this.transform.position.y < player.transform.position.y && !playedAudio)
         {
             audioSource.PlayOneShot(flyby, 0.7F);
+            this.playedAudio = true;
             Debug.Log("Played Flyby Sound");
         }
-        if (this.transform.position.y < player.transform.position.y) playedAudio = false; 
 
         if (health < 0)
         {
